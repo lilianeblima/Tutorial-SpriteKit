@@ -14,7 +14,10 @@
 		11BFADC71AF7A8E300E74006 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 11BFADC61AF7A8E300E74006 /* Images.xcassets */; };
 		11BFADCA1AF7A8E300E74006 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 11BFADC81AF7A8E300E74006 /* LaunchScreen.xib */; };
 		11BFADD61AF7A8E300E74006 /* SpriteitSimpleGameTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BFADD51AF7A8E300E74006 /* SpriteitSimpleGameTests.swift */; };
-		11BFADE21AF7AF0400E74006 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 11BFADE11AF7AF0400E74006 /* Sounds */; };
+		11BFADE61AF7BECB00E74006 /* GameOverScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 11BFADE51AF7BECB00E74006 /* GameOverScene.swift */; };
+		11BFADE81AF7C26700E74006 /* pew-pew-lei.caf in Resources */ = {isa = PBXBuildFile; fileRef = 11BFADE71AF7C26700E74006 /* pew-pew-lei.caf */; };
+		11BFADEA1AF7C26A00E74006 /* background-music-aac.caf in Resources */ = {isa = PBXBuildFile; fileRef = 11BFADE91AF7C26A00E74006 /* background-music-aac.caf */; };
+		11BFADEC1AF7C2B500E74006 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = 11BFADEB1AF7C2B500E74006 /* Sounds */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,7 +42,10 @@
 		11BFADCF1AF7A8E300E74006 /* SpriteitSimpleGameTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SpriteitSimpleGameTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		11BFADD41AF7A8E300E74006 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		11BFADD51AF7A8E300E74006 /* SpriteitSimpleGameTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpriteitSimpleGameTests.swift; sourceTree = "<group>"; };
-		11BFADE11AF7AF0400E74006 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
+		11BFADE51AF7BECB00E74006 /* GameOverScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameOverScene.swift; sourceTree = "<group>"; };
+		11BFADE71AF7C26700E74006 /* pew-pew-lei.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "pew-pew-lei.caf"; path = "Sounds/pew-pew-lei.caf"; sourceTree = "<group>"; };
+		11BFADE91AF7C26A00E74006 /* background-music-aac.caf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "background-music-aac.caf"; path = "Sounds/background-music-aac.caf"; sourceTree = "<group>"; };
+		11BFADEB1AF7C2B500E74006 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,9 +87,12 @@
 		11BFADB81AF7A8E300E74006 /* SpriteitSimpleGame */ = {
 			isa = PBXGroup;
 			children = (
-				11BFADE11AF7AF0400E74006 /* Sounds */,
+				11BFADEB1AF7C2B500E74006 /* Sounds */,
+				11BFADE91AF7C26A00E74006 /* background-music-aac.caf */,
+				11BFADE71AF7C26700E74006 /* pew-pew-lei.caf */,
 				11BFADBB1AF7A8E300E74006 /* AppDelegate.swift */,
 				11BFADBF1AF7A8E300E74006 /* GameScene.swift */,
+				11BFADE51AF7BECB00E74006 /* GameOverScene.swift */,
 				11BFADC11AF7A8E300E74006 /* GameViewController.swift */,
 				11BFADC31AF7A8E300E74006 /* Main.storyboard */,
 				11BFADC61AF7A8E300E74006 /* Images.xcassets */,
@@ -198,9 +207,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				11BFADEC1AF7C2B500E74006 /* Sounds in Resources */,
 				11BFADCA1AF7A8E300E74006 /* LaunchScreen.xib in Resources */,
 				11BFADC71AF7A8E300E74006 /* Images.xcassets in Resources */,
-				11BFADE21AF7AF0400E74006 /* Sounds in Resources */,
+				11BFADEA1AF7C26A00E74006 /* background-music-aac.caf in Resources */,
+				11BFADE81AF7C26700E74006 /* pew-pew-lei.caf in Resources */,
 				11BFADC51AF7A8E300E74006 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -221,6 +232,7 @@
 			files = (
 				11BFADC01AF7A8E300E74006 /* GameScene.swift in Sources */,
 				11BFADC21AF7A8E300E74006 /* GameViewController.swift in Sources */,
+				11BFADE61AF7BECB00E74006 /* GameOverScene.swift in Sources */,
 				11BFADBC1AF7A8E300E74006 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -417,6 +429,7 @@
 				11BFADDB1AF7A8E300E74006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		11BFADDC1AF7A8E300E74006 /* Build configuration list for PBXNativeTarget "SpriteitSimpleGameTests" */ = {
 			isa = XCConfigurationList;
@@ -425,6 +438,7 @@
 				11BFADDE1AF7A8E300E74006 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

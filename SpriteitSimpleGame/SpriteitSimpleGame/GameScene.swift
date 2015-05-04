@@ -8,6 +8,31 @@
 
 import SpriteKit
 
+import AVFoundation
+
+var backgroundMusicPlayer: AVAudioPlayer!
+
+func playBackgroundMusic(filename: String) {
+    let url = NSBundle.mainBundle().URLForResource(
+        filename, withExtension: nil)
+    if (url == nil) {
+        println("Could not find file: \(filename)")
+        return
+    }
+    
+    var error: NSError? = nil
+    backgroundMusicPlayer =
+        AVAudioPlayer(contentsOfURL: url, error: &error)
+    if backgroundMusicPlayer == nil {
+        println("Could not create audio player: \(error!)")
+        return
+    }
+    
+    backgroundMusicPlayer.numberOfLoops = -1
+    backgroundMusicPlayer.prepareToPlay()
+    backgroundMusicPlayer.play()
+}
+
 
 func + (left: CGPoint, right: CGPoint) -> CGPoint {
     return CGPoint(x: left.x + right.x, y: left.y + right.y)
@@ -48,12 +73,18 @@ struct PhysicsCategory {
     static  let Projectile: UInt32 = 0b10
 }
 
+
 //===================================================================
 class GameScene: SKScene, SKPhysicsContactDelegate {
    
     let player = SKSpriteNode(imageNamed:"player")
+    var monstersDestroyed = 0
+    
 
     override func didMoveToView(view: SKView) {
+        
+        playBackgroundMusic("background-music-aac.caf")
+        
         backgroundColor = SKColor.whiteColor()
         player.position = CGPoint(x: size.width * 0.1, y: size.height * 0.5)
         addChild(player)
@@ -98,14 +129,27 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         monster.physicsBody?.contactTestBitMask = PhysicsCategory.Projectile
         monster.physicsBody?.collisionBitMask = PhysicsCategory.None
         
+        let loseAction = SKAction.runBlock() {
+            let reveal = SKTransition.flipHorizontalWithDuration(0.5)
+            let gameOverScene = GameOverScene(size: self.size, won: false)
+            self.view?.presentScene(gameOverScene, transition: reveal)
+        }
+        monster.runAction(SKAction.sequence([actionMove, loseAction, actionMoveDone]))
+        
     }
     
     override func touchesEnded(touches: Set<NSObject>, withEvent event: UIEvent) {
+        
+        runAction(SKAction.playSoundFileNamed("pew-pew-lei.caf", waitForCompletion: false))
+
         let touchAux = touches as NSSet
-        let touch = touchAux.anyObject() as! UITouch
+        let projectile = SKSpriteNode(imageNamed: "projectile")
+        
+       // for touch in touches as! Set<UITouch>{
+       let touch = touchAux.anyObject() as! UITouch
         let touchLocation = touch.locationInNode(self)
         
-        let projectile = SKSpriteNode(imageNamed: "projectile")
+        
         projectile.position = player.position
         
         let offset = touchLocation - projectile.position
@@ -122,7 +166,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         let actionMove = SKAction.moveTo(realDest, duration: 1.0)
         let actionMoveDone = SKAction.removeFromParent()
-        projectile.runAction(SKAction.sequence([actionMove, actionMoveDone]))
+            projectile.runAction(SKAction.sequence([actionMove, actionMoveDone]))
+        //}
         
         projectile.physicsBody = SKPhysicsBody(circleOfRadius: projectile.size.width/2)
         projectile.physicsBody?.dynamic = true
@@ -152,6 +197,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         if (firstBody.categoryBitMask & PhysicsCategory.Monster != 0) && (secondBody.categoryBitMask & PhysicsCategory.Projectile != 0){
             projectileDidCollideWithMonster(firstBody.node as! SKSpriteNode, monster: secondBody.node as! SKSpriteNode)
+        }
+        
+        self.monstersDestroyed++
+        if self.monstersDestroyed > 30 {
+        let reveal = SKTransition.flipHorizontalWithDuration(0.5)
+        let gameOverScene = GameOverScene(size: self.size, won: true)
+        self.view?.presentScene(gameOverScene, transition: reveal)
         }
     }
     
