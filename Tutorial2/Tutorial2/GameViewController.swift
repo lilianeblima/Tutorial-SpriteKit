@@ -31,14 +31,14 @@ class GameViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        if let scene = GameScene.unarchiveFromFile("GameScene") as? GameScene {
+        if let scene = GameOverScene.unarchiveFromFile("GameOverOverScene") as? GameOverScene {
             // Configure the view.
             let skView = self.view as! SKView
             skView.showsFPS = false
             skView.showsNodeCount = false
             
             /* Sprite Kit applies additional optimizations to improve rendering performance */
-            skView.ignoresSiblingOrder = true
+            skView.ignoresSiblingOrder = false
             
             /* Set the scale mode to scale to fit the window */
             scene.scaleMode = .AspectFill
