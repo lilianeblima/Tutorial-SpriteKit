@@ -28,6 +28,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         borderBody.friction = 0
         
+        
         self.physicsBody = borderBody
         physicsWorld.gravity = CGVectorMake(0, 0)
         physicsWorld.contactDelegate = self
